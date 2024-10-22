@@ -19,10 +19,6 @@ async function api(method, path, data, auth) {
         return response.json();
 }
 
-async function getCaCerts() {
-        return (await api("GET", "/cert/ca")).cert;
-}
-
 async function getGuestIdentity(public_key_pem, auth) {
         let params = new URLSearchParams({
                 client_public_key: public_key_pem,
@@ -33,19 +29,6 @@ async function getGuestIdentity(public_key_pem, auth) {
                 null,
                 auth
         );
-}
-
-async function getGuestCertificate(csr, auth) {
-        return (
-                await api(
-                        "POST",
-                        "/cert/sign/client-guest",
-                        {
-                                certificateRequest: csr,
-                        },
-                        auth
-                )
-        ).cert;
 }
 
 async function getGuestDetails(code) {
@@ -93,10 +76,4 @@ async function getRoom(room_id, auth) {
         return response.room;
 }
 
-export {
-        getCaCerts,
-        getGuestIdentity,
-        getGuestCertificate,
-        getGuestDetails,
-        getRoom,
-};
+export { getGuestIdentity, getGuestDetails, getRoom };
