@@ -1,5 +1,5 @@
-A proof-of-concept library that demonstrates the basic building blocks
-needed to authenticate with the Vivi "box" internal API.
+A proof-of-concept library that demonstrates the basic building
+blocks needed to authenticate with the Vivi "box" internal API.
 
 Login to the API and download certificates, identity, and room data:
 $ npm run setup <GUEST_CODE>
