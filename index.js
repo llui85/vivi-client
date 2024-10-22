@@ -6,16 +6,14 @@ import crypto from "crypto";
 import io from "socket.io-client";
 import fs from "fs/promises";
 import { v4 as uuid } from "uuid";
-
-import { getRoom } from "./api.js";
 import { SOCKET_PORT } from "./config.js";
 
-const [privateKeyPEM, identity, guest] = await Promise.all([
+const [privateKeyPEM, identity, guest, room] = await Promise.all([
         (await fs.readFile("./data/guest_private.pem")).toString(),
         JSON.parse((await fs.readFile("./data/identity.json")).toString()),
         JSON.parse((await fs.readFile("./data/guest.json")).toString()),
+        JSON.parse((await fs.readFile("./data/room.json")).toString()),
 ]);
-const room = await getRoom(guest.info.room_id, guest.auth);
 
 // todo: get the latest version of socket.io-client working here
 const client = io.connect(
